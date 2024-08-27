@@ -139,7 +139,7 @@
        ONE Idea<br>At a Time.
     </div>
     <div class="note"> 
-        Note: If you changes browsers or clears their cache, your ideas will be lost. 
+        Note: If you changes browsers or clears their cache, your ideas will be lost.  <br>
     </div>
     <div class="controls">
         <button class="nav-button" onclick="showSection('mainPage')">Main</button>
@@ -151,6 +151,7 @@
     <div id="mainPage" class="section active-section card">
         <div class="editor">
             <textarea id="newIdeaText" rows="2" placeholder="Enter new idea name"></textarea>
+             <br>
             <button onclick="saveIdea()">Save Idea</button>
         </div>
         <div>
@@ -244,6 +245,7 @@
                 details.innerHTML = `
                     Deadline: ${idea.deadline || 'No deadline set'}<br>
                     <textarea rows="5" placeholder="Enter idea details">${idea.details}</textarea>
+                    <br>
                     <button onclick="saveDetails(${index})">Save Details</button>
                 `;
 
