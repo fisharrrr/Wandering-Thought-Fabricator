@@ -6,7 +6,6 @@ body {
     color: #333;
     max-width: 800px;
     margin: auto;
-    position: relative;
     min-height: 100vh;
 }
 
@@ -27,19 +26,21 @@ body {
 .quote {
     font-family: 'Helvetica', sans-serif;
     font-size: 40pt;
-    margin: 20px 0;
+    margin: 40px 0;
     color: #002082;
+    line-height: 1.2;
 }
 
 .note {
     font-size: 12pt;
     color: #d9534f;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .nav-button {
     margin: 0 5px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     background-color: #002082;
     color: #ffffff;
     border: none;
@@ -73,18 +74,14 @@ body {
     margin-bottom: 20px;
 }
 
-textarea {
-    width: 100%;
-    height: 80px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    resize: vertical;
+#editor-container {
+    height: 150px;
+    margin-bottom: 10px;
 }
 
 button {
     margin-top: 10px;
-    padding: 10px 16px;
+    padding: 10px 20px;
     background-color: #002082;
     color: #fff;
     border: none;
