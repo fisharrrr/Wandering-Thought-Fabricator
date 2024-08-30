@@ -1,145 +1,24 @@
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; img-src 'self' data: blob: https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com; media-src 'self' data: blob: https://pfst.cf2.poecdn.net https://i.imgur.com https://wikimedia.org; frame-src 'self' https://www.youtube.com; upgrade-insecure-requests; block-all-mixed-content;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wandering Thought Fabricator Idea Machine</title>
-    <style>
-        @font-face {
-            font-family: 'F25_Bank_Printer';
-            src: 'F25_Bank_Printer.ttf' format('truetype');
-        }
-        body {
-            font-family: 'Helvetica', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
-            color: #333;
-            max-width: 800px;
-            margin: auto;
-            position: relative;
-            min-height: 100vh;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .title {
-            font-family: 'F25_Bank_Printer', sans-serif;
-            font-size: 12pt;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        .quote {
-            font-family: 'Helvetica', sans-serif;
-            font-size: 40pt;
-            margin: 20px 0;
-            color: #002082;
-        }
-        .nav-button {
-            margin: 0 5px;
-            padding: 8px 16px;
-            background-color: #002082;
-            color: #ffffff;
-            border: none;
-            border-radius: 24px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .nav-button:hover {
-            background-color: #001060;
-        }
-        .section {
-            display: none;
-            margin-bottom: 40px;
-        }
-        .active-section {
-            display: block;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .editor, .controls, .ongoing-idea, .finished-ideas, .about {
-            margin-bottom: 20px;
-        }
-        .idea-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .idea-item {
-            padding: 10px;
-            background-color: #eee;
-            margin-bottom: 5px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-            position: relative;
-        }
-        .idea-item:hover, .active {
-            background-color: #ddd;
-        }
-        .idea-details {
-            display: none;
-            margin-top: 10px;
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-        }
-        textarea {
-            width: 80%;
-            height: 80px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            resize: vertical;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 16px;
-            background-color: #002082;
-            color: #fff;
-            border: none;
-            border-radius: 24px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        button:hover {
-            background-color: #001060;
-        }
-        .logo {
-            max-height: 50px;
-        }
-        .version {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 10pt;
-            color: #888;
-        }
-        .note {
-            font-size: 12pt;
-            color: #d9534f;
-            margin-top: 20px;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <div class="header">
-        <img src= "1WTFlogo.png" alt="WTF Logo" class="logo">
+        <img src="images/1whiteBGWTFlogo.png" alt="WTF Logo" class="logo">
         <div class="title">
             Wandering Thought Fabricator
         </div>
     </div>
     <div class="quote">
-       ONE Idea<br>At a Time.
+        "ONE Idea<br>At a Time."
     </div>
-    <div class="note"> 
-        Note: If you changes browsers or clears their cache, your ideas will be lost.  <br>
+    <div class="note">
+        Note: If a user changes browsers or clears their cache, the data will be lost.
     </div>
     <div class="controls">
         <button class="nav-button" onclick="showSection('mainPage')">Main</button>
@@ -150,8 +29,7 @@
 
     <div id="mainPage" class="section active-section card">
         <div class="editor">
-            <textarea id="newIdeaText" rows="2" placeholder="Enter new idea name"></textarea>
-             <br>
+            <div id="editor-container"></div>
             <button onclick="saveIdea()">Save Idea</button>
         </div>
         <div>
@@ -181,200 +59,17 @@
         <div class="about">
             <h2>About This Machine</h2>
             <p>
-                The Wandering Thought Fabricator Idea Machine is designed to help you manage your creative ideas efficiently.
-                It allows you to store, update, and track the progress of your ideas with ease.
+                The Wandering Thought Fabricator Idea Machine is designed to help you manage your creative ideas efficiently. 
+                It allows you to store, update, and track the progress of your ideas with ease. 
                 The minimalist design ensures a distraction-free experience, making it ideal for both web and mobile use.
             </p>
         </div>
     </div>
 
-    <div class="version">Version 0.0.6</div>
+    <div class="version">Version 0.0.5</div>
 
-    <script>
-        let ideas = JSON.parse(localStorage.getItem('ideas')) || [];
-        let finishedIdeas = JSON.parse(localStorage.getItem('finishedIdeas')) || [];
-        let currentIndex = null;
-        let isRandomStarted = false;
-
-        document.getElementById('newIdeaText').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                saveIdea();
-            }
-        });
-
-        function saveIdea() {
-            const text = document.getElementById('newIdeaText').value.trim();
-            if (text) {
-                const idea = {
-                    title: text,
-                    details: '',
-                    deadline: '',
-                    finishedDate: null
-                };
-                ideas.push(idea);
-                document.getElementById('newIdeaText').value = '';
-                updateIdeasList();
-                localStorage.setItem('ideas', JSON.stringify(ideas));
-            }
-        }
-
-        function updateIdeasList() {
-            const tabs = document.getElementById('ideaTabs');
-            tabs.innerHTML = '';
-            ideas.forEach((idea, index) => {
-                const item = document.createElement('li');
-                item.className = 'idea-item';
-                item.textContent = idea.title;
-                item.onclick = (e) => {
-                    if (!e.target.matches('textarea, button')) {
-                        toggleIdeaDetails(index);
-                    }
-                };
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-btn';
-                deleteBtn.textContent = 'Delete';
-                deleteBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    deleteIdea(index);
-                };
-
-                const details = document.createElement('div');
-                details.className = 'idea-details';
-                details.innerHTML = `
-                    Deadline: ${idea.deadline || 'No deadline set'}<br>
-                    <textarea rows="5" placeholder="Enter idea details">${idea.details}</textarea>
-                    <br>
-                    <button onclick="saveDetails(${index})">Save Details</button>
-                `;
-
-                item.appendChild(deleteBtn);
-                item.appendChild(details);
-                tabs.appendChild(item);
-            });
-
-            updateFinishedIdeasList();
-        }
-
-        function updateFinishedIdeasList() {
-            const finishedTabs = document.getElementById('finishedIdeaTabs');
-            finishedTabs.innerHTML = '';
-            finishedIdeas.forEach((idea) => {
-                const item = document.createElement('li');
-                item.className = 'idea-item';
-                item.innerHTML = `
-                    ${idea.title}<br>
-                    Finished on: ${idea.finishedDate}<br>
-                    Deadline: ${idea.deadline}<br>
-                    <div class="markdown">${marked.parse(idea.details)}</div>
-                `;
-                finishedTabs.appendChild(item);
-            });
-        }
-
-        function toggleIdeaDetails(index) {
-            currentIndex = index;
-            const items = document.querySelectorAll('.idea-item');
-            items.forEach((item, idx) => {
-                const details = item.querySelector('.idea-details');
-                if (idx === index) {
-                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
-                } else {
-                    details.style.display = 'none';
-                }
-            });
-        }
-
-        function saveDetails(index) {
-            const items = document.querySelectorAll('.idea-item');
-            const detailsText = items[index].querySelector('textarea').value.trim();
-            ideas[index].details = detailsText;
-            localStorage.setItem('ideas', JSON.stringify(ideas));
-            alert(`Details saved for ${ideas[index].title}`);
-            if (index === currentIndex) {
-                updateOngoingIdea();
-            }
-        }
-
-        function deleteIdea(index) {
-            ideas.splice(index, 1);
-            localStorage.setItem('ideas', JSON.stringify(ideas));
-            updateIdeasList();
-            if (index === currentIndex) {
-                document.getElementById('ongoingIdea').innerHTML = 'No ongoing idea';
-                currentIndex = null;
-            }
-        }
-
-        function handleRandomOrNext() {
-            if (!isRandomStarted) {
-                startRandomIdea();
-                isRandomStarted = true;
-                document.getElementById('randomNextButton').textContent = 'Finish and Next';
-            } else {
-                finishAndNextIdea();
-            }
-        }
-
-        function startRandomIdea() {
-            if (ideas.length > 0) {
-                const randomIndex = Math.floor(Math.random() * ideas.length);
-                setOngoingIdea(randomIndex);
-            }
-        }
-
-        function finishAndNextIdea() {
-            if (currentIndex !== null) {
-                const finishedIdea = ideas[currentIndex];
-                finishedIdea.finishedDate = new Date().toLocaleString();
-                finishedIdeas.push(finishedIdea);
-                ideas.splice(currentIndex, 1);
-                localStorage.setItem('ideas', JSON.stringify(ideas));
-                localStorage.setItem('finishedIdeas', JSON.stringify(finishedIdeas));
-                updateIdeasList();
-
-                if (ideas.length > 0) {
-                    currentIndex = currentIndex >= ideas.length ? 0 : currentIndex;
-                    setOngoingIdea(currentIndex);
-                } else {
-                    document.getElementById('ongoingIdea').innerHTML = 'No ongoing idea';
-                    currentIndex = null;
-                }
-            }
-        }
-
-        function setOngoingIdea(index) {
-            currentIndex = index;
-            const ongoingIdea = ideas[currentIndex];
-            ongoingIdea.deadline = new Date(Date.now() + rando(1, 30) * 24 * 60 * 60 * 1000).toLocaleDateString();
-            localStorage.setItem('ideas', JSON.stringify(ideas));
-            updateOngoingIdea();
-            updateIdeasList();
-        }
-
-        function updateOngoingIdea() {
-            if (currentIndex !== null) {
-                const ongoingIdea = ideas[currentIndex];
-                const ongoingIdeaDisplay = document.getElementById('ongoingIdea');
-                ongoingIdeaDisplay.innerHTML = `
-                    <strong>Ongoing Idea: ${ongoingIdea.title}</strong><br>
-                    Deadline: ${ongoingIdea.deadline}<br>
-                    <div class="markdown">${marked.parse(ongoingIdea.details)}</div>
-                `;
-            }
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active-section');
-            });
-            document.getElementById(sectionId).classList.add('active-section');
-        }
-
-        // Initialize
-        updateIdeasList();
-    </script>
-
-
-</body></html>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
