@@ -1,0 +1,110 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.title {
+    font-family: 'Maghelia', sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.quote {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 40pt;
+    margin: 20px 0;
+    color: #002082;
+}
+
+.note {
+    font-size: 12pt;
+    color: #d9534f;
+    margin-top: 20px;
+}
+
+.nav-button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    background-color: #002082;
+    color: #ffffff;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+    background-color: #001060;
+}
+
+.section {
+    display: none;
+    margin-bottom: 40px;
+}
+
+.active-section {
+    display: block;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.editor {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    resize: vertical;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #002082;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #001060;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+.version {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10pt;
+    color: #888;
+}
