@@ -32,33 +32,7 @@ function updateIdeasList() {
     const tabs = document.getElementById('ideaTabs');
     tabs.innerHTML = '';
     ideas.forEach((idea, index) => {
-        const item = document.createElement('li');
-        item.className = 'idea-item';
-        item.innerHTML = idea.title;
-        item.onclick = (e) => {
-            if (!e.target.matches('.delete-btn, button')) {
-                toggleIdeaDetails(index);
-            }
-        };
-        
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete-btn';
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.onclick = (e) => {
-            e.stopPropagation();
-            deleteIdea(index);
-        };
-
-        const details = document.createElement('div');
-        details.className = 'idea-details';
-        details.innerHTML = `
-            Deadline: ${idea.deadline || 'No deadline set'}<br>
-            <div id="editor-container-${index}"></div>
-            <button onclick="saveDetails(${index})">Save Details</button>
-        `;
-        
-        item.appendChild(deleteBtn);
-        item.appendChild(details);
+        const item = createIdeaItem(idea, index);
         tabs.appendChild(item);
 
         // Initialize a new Quill editor for each idea's details
@@ -186,3 +160,40 @@ function showSection(sectionId) {
 
 // Initialize
 updateIdeasList();
+
+function createIdeaItem(idea, index) {
+    const item = document.createElement('div');
+    item.className = 'idea-item card';
+    
+    const titleElement = document.createElement('h3');
+    titleElement.className = 'idea-title';
+    titleElement.textContent = idea.title;
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.onclick = (e) => {
+        e.stopPropagation();
+        deleteIdea(index);
+    };
+    
+    const details = document.createElement('div');
+    details.className = 'idea-details';
+    details.innerHTML = `
+        <p>Deadline: ${idea.deadline || 'No deadline set'}</p>
+        <div id="editor-container-${index}" class="details-editor"></div>
+        <button class="save-btn" onclick="saveDetails(${index})">Save Details</button>
+    `;
+    
+    item.appendChild(titleElement);
+    item.appendChild(deleteBtn);
+    item.appendChild(details);
+    
+    item.onclick = (e) => {
+        if (!e.target.matches('.delete-btn, .save-btn')) {
+            toggleIdeaDetails(index);
+        }
+    };
+    
+    return item;
+}
