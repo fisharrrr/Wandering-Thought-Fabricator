@@ -250,3 +250,61 @@ function createIdeaItem(idea, index) {
     
     return item;
 }
+
+// Add these functions to your existing JavaScript
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.getElementById('menuButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const mainContent = document.getElementById('mainContent');
+    const ideasPage = document.getElementById('ideasPage');
+    const finishedIdeasPage = document.getElementById('finishedIdeasPage');
+    const aboutPage = document.getElementById('aboutPage');
+
+    menuButton.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    dropdownMenu.addEventListener('click', function(event) {
+        if (event.target.classList.contains('menu-item')) {
+            event.preventDefault();
+            const page = event.target.getAttribute('data-page');
+            showPage(page);
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    function showPage(page) {
+        mainContent.style.display = 'none';
+        ideasPage.style.display = 'none';
+        finishedIdeasPage.style.display = 'none';
+        aboutPage.style.display = 'none';
+
+        switch(page) {
+            case 'main':
+                mainContent.style.display = 'block';
+                break;
+            case 'ideas':
+                ideasPage.style.display = 'block';
+                updateIdeasList();
+                break;
+            case 'finished':
+                finishedIdeasPage.style.display = 'block';
+                updateFinishedIdeasList();
+                break;
+            case 'about':
+                aboutPage.style.display = 'block';
+                break;
+        }
+    }
+
+    // Existing code for updateIdeasList and updateFinishedIdeasList...
+});
+
+// Rest of your existing JavaScript...
