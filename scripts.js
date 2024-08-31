@@ -18,10 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const aboutPage = document.getElementById('aboutPage');
 
     function saveIdea(idea) {
+        const randomDays = Math.floor(Math.random() * 15) + 1; // Random number between 1 and 15
+        const deadline = new Date(Date.now() + randomDays * 24 * 60 * 60 * 1000);
         ideas.push({
             title: idea,
             details: '',
-            deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()
+            deadline: deadline.toLocaleDateString()
         });
         localStorage.setItem('ideas', JSON.stringify(ideas));
     }
