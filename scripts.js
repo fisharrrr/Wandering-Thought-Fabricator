@@ -244,4 +244,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         displayCurrentIdea();
     }
+
+    document.querySelector('.logo-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        showPage('main');
+    });
 });
