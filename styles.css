@@ -44,6 +44,8 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   flex-grow: 1;
+  position: relative;
+  height: calc(100vh - 100px); /* Adjust based on your header height */
 }
 
 .quote {
@@ -64,15 +66,16 @@ body {
 .idea-input {
   position: absolute;
   bottom: 20px;
-  left: 0;
-  right: 0;
-  width: calc(100% - 40px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Adjust as needed */
+  max-width: 600px; /* Adjust as needed */
   margin: 0 20px;
 }
 
 #ideaInput {
   width: 100%;
-  padding: 15px;
+  padding: 20px 15px; /* Increased vertical padding */
   font-size: 18px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -88,8 +91,8 @@ body {
 
 .ongoing-idea {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   background-color: var(--card-background);
   color: white;
   padding: 20px;
@@ -236,7 +239,7 @@ body {
   left: 0;
   width: 506px;
   height: 348px;
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to visible */
 }
 
 .ONE-idea-at-a-time {
@@ -252,6 +255,4 @@ body {
   line-height: 58px;
   text-align: left;
   white-space: pre-line;
-  padding-top: 20px;  /* Adjust as needed */
-  padding-left: 20px; /* Adjust as needed */
 }
