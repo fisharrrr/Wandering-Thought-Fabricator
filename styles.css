@@ -229,3 +229,21 @@ body {
     border: none;
     cursor: pointer;
 }
+
+.label {
+  width: 506px;
+  height: 348px;
+}
+
+.label .ONE-idea-at-a-time {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: "Heiti TC-Medium", Helvetica;
+  font-weight: 500;
+  color: #002082;
+  font-size: 64px;
+  text-align: justify;
+  letter-spacing: 0;
+  line-height: 58px;
+}
