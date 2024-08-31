@@ -36,6 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 100px);
+  position: relative;
 }
 
 .content-wrapper {
@@ -46,7 +47,7 @@ body {
 }
 
 .quote {
- position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   font-family: "Heiti TC-Medium", Helvetica;
@@ -56,12 +57,17 @@ body {
   text-align: justify;
   letter-spacing: 0;
   line-height: 58px;
+  width: 506px;
+  height: 348px;
 }
 
 .idea-input {
-  width: 100%;
-  position: relative;
-  margin-top: auto;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  width: calc(100% - 40px);
+  margin: 0 20px;
 }
 
 #ideaInput {
@@ -81,6 +87,9 @@ body {
 }
 
 .ongoing-idea {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: var(--card-background);
   color: white;
   padding: 20px;
@@ -160,8 +169,16 @@ body {
   }
 
   .quote {
-    font-size: 36px;
-    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: "Heiti TC-Medium", Helvetica;
+    font-weight: 500;
+    color: #002082;
+    font-size: 64px;
+    text-align: justify;
+    letter-spacing: 0;
+    line-height: 58px;
   }
   
   .ongoing-idea {
