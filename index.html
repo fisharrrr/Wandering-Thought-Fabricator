@@ -3,73 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wandering Thought Fabricator Idea Machine</title>
+    <title>wtf. | Wandering Thought Fabricator</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <div class="header">
-        <img src="images/1whiteBGWTFlogo.png" alt="WTF Logo" class="logo">
-        <div class="title">
-            Wandering Thought Fabricator
-        </div>
-    </div>
-    <div class="quote">
-        ONE Idea<br>At a Time.
-    </div>
-    <div class="note">
-        Note: If a user changes browsers or clears their cache, the data will be lost.
-    </div>
-    <div class="controls">
-        <button class="nav-button" onclick="showSection('mainPage')">Main</button>
-        <button class="nav-button" onclick="showSection('finishedIdeas')">Finished</button>
-        <button class="nav-button" onclick="showSection('ideaList')">Ideas</button>
-        <button class="nav-button" onclick="showSection('about')">About</button>
+        <div class="logo">wtf.</div>
+        <div class="menu-icon">☰</div>
     </div>
 
-    <div id="mainPage" class="section active-section card">
-        <div class="editor">
-            <div id="editor-container"></div>
-            <button onclick="saveIdea()">Save Idea</button>
+    <div class="main-content">
+        <div class="quote">
+            ONE<br>
+            Idea<br>
+            at a<br>
+            Time.
         </div>
-        <div>
-            <button id="randomNextButton" onclick="handleRandomOrNext()">Start Random Idea</button>
+
+        <div class="idea-input">
+            <input type="text" id="ideaInput" placeholder="Your ideas here">
+            <span class="enter-hint">Enter ↵</span>
         </div>
+
         <div class="ongoing-idea" id="ongoingIdea">
-            <!-- Ongoing idea details will be displayed here -->
+            <h2>On going task.</h2>
+            <div class="task-content">
+                <h3 id="taskTitle">Read a book</h3>
+                <p id="taskDetails">details details details details detailsdetailsdetailsdetailsdetailsdetails</p>
+                <p id="taskDeadline">Deadline: 3 SEP</p>
+            </div>
+            <button id="doneNextButton">DONE & NEXT</button>
         </div>
     </div>
 
-    <div id="finishedIdeas" class="section card">
-        <div class="finished-ideas">
-            <h2>Finished Ideas</h2>
-            <ul class="idea-list" id="finishedIdeaTabs">
-                <!-- Finished ideas will be added here -->
-            </ul>
-        </div>
-    </div>
-
-    <div id="ideaList" class="section card">
-        <ul class="idea-list" id="ideaTabs">
-            <!-- Idea items will be added here -->
-        </ul>
-    </div>
-
-    <div id="about" class="section card">
-        <div class="about">
-            <h2>About This Machine</h2>
-            <p>
-                The Wandering Thought Fabricator Idea Machine is designed to help you manage your creative ideas efficiently. 
-                It allows you to store, update, and track the progress of your ideas with ease. 
-                The minimalist design ensures a distraction-free experience, making it ideal for both web and mobile use.
-            </p>
-        </div>
-    </div>
-
-    <div class="version">Version 0.0.5</div>
-
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

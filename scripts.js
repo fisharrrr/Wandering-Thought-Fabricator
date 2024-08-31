@@ -2,12 +2,65 @@ let quill;
 
 // Initialize Quill
 document.addEventListener('DOMContentLoaded', function() {
-    quill = new Quill('#editor-container', {
-        theme: 'snow'
+    const ideaInput = document.getElementById('ideaInput');
+    const ongoingIdea = document.getElementById('ongoingIdea');
+    const taskTitle = document.getElementById('taskTitle');
+    const taskDetails = document.getElementById('taskDetails');
+    const taskDeadline = document.getElementById('taskDeadline');
+    const doneNextButton = document.getElementById('doneNextButton');
+
+    let ideas = JSON.parse(localStorage.getItem('ideas')) || [];
+    let currentIdeaIndex = -1;
+
+    function saveIdea(idea) {
+        ideas.push({
+            title: idea,
+            details: '',
+            deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()
+        });
+        localStorage.setItem('ideas', JSON.stringify(ideas));
+    }
+
+    function displayNextIdea() {
+        currentIdeaIndex++;
+        if (currentIdeaIndex >= ideas.length) {
+            currentIdeaIndex = 0;
+        }
+        if (ideas.length > 0) {
+            const idea = ideas[currentIdeaIndex];
+            taskTitle.textContent = idea.title;
+            taskDetails.textContent = idea.details || 'No details added yet.';
+            taskDeadline.textContent = `Deadline: ${idea.deadline}`;
+            ongoingIdea.style.display = 'block';
+        } else {
+            ongoingIdea.style.display = 'none';
+        }
+    }
+
+    ideaInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && this.value.trim() !== '') {
+            saveIdea(this.value.trim());
+            this.value = '';
+            if (ideas.length === 1) {
+                displayNextIdea();
+            }
+        }
     });
+
+    doneNextButton.addEventListener('click', function() {
+        if (ideas.length > 0) {
+            ideas.splice(currentIdeaIndex, 1);
+            localStorage.setItem('ideas', JSON.stringify(ideas));
+            displayNextIdea();
+        }
+    });
+
+    // Initialize
+    if (ideas.length > 0) {
+        displayNextIdea();
+    }
 });
 
-let ideas = JSON.parse(localStorage.getItem('ideas')) || [];
 let finishedIdeas = JSON.parse(localStorage.getItem('finishedIdeas')) || [];
 let currentIndex = null;
 let isRandomStarted = false;
