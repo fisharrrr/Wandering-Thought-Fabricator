@@ -92,12 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     ideaInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && this.value.trim() !== '') {
-            saveIdea(this.value.trim());
-            this.value = '';
-            if (ideas.length === 1) {
-                displayNextIdea();
+        if (e.key === 'Enter') {
+            if (this.value.trim() !== '') {
+                saveIdea(this.value.trim());
+                this.value = '';
             }
+            this.classList.remove('active');
+            this.style.boxShadow = 'none';
         }
     });
 
@@ -271,17 +272,27 @@ document.addEventListener('DOMContentLoaded', function() {
         showPage('main');
     });
 
-    function focusIdeaInput() {
-        const ideaInput = document.getElementById('ideaInput');
-        ideaInput.focus();
-    }
 
     document.addEventListener('keydown', function(event) {
         if (document.getElementById('mainContent').style.display !== 'none') {
-            if (event.key === 'Enter' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            const ideaInput = document.getElementById('ideaInput');
+            if (event.key === 'Enter' && document.activeElement !== ideaInput) {
                 event.preventDefault();
-                focusIdeaInput();
+                activateIdeaInput();
             }
         }
+    });
+
+    function activateIdeaInput() {
+        const ideaInput = document.getElementById('ideaInput');
+        ideaInput.classList.add('active');
+        // Optional: Add a visual indicator that the input is active
+        ideaInput.style.boxShadow = '0 0 5px #002082';
+    }
+
+    const ideaInput = document.getElementById('ideaInput');
+    ideaInput.addEventListener('blur', function() {
+        this.classList.remove('active');
+        this.style.boxShadow = 'none';
     });
 });
