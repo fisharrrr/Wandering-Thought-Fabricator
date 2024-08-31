@@ -1,0 +1,268 @@
+:root {
+  --primary-color: #002082;
+  --text-color: #333;
+  --background-color: #ffffff;
+  --card-background: #333333;
+  --input-background: #f5f5f5;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.logo {
+  height: 30px;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  position: relative;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+  position: relative;
+  height: calc(100vh - 100px); /* Adjust based on your header height */
+}
+
+.quote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Heiti TC-Medium", Helvetica;
+  font-weight: 500;
+  color: #002082;
+  font-size: 64px;
+  text-align: justify;
+  letter-spacing: 0;
+  line-height: 58px;
+  width: 506px;
+  height: 348px;
+}
+
+.idea-input {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* Adjust as needed */
+  max-width: 600px; /* Adjust as needed */
+  margin: 0 20px;
+}
+
+#ideaInput {
+  width: 100%;
+  padding: 20px 15px; /* Increased vertical padding */
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enter-hint {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  color: #999;
+}
+
+.ongoing-idea {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--card-background);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ongoing-idea h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.task-content {
+  background-color: white;
+  color: var(--text-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+#taskTitle {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+#taskDetails {
+  font-size: 14px;
+}
+
+#taskDeadline {
+  font-size: 14px;
+  color: var(--primary-color);
+  margin-bottom: 0;
+}
+
+#doneNextButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  float: right;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.menu-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .quote {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: "Heiti TC-Medium", Helvetica;
+    font-weight: 500;
+    color: #002082;
+    font-size: 64px;
+    text-align: justify;
+    letter-spacing: 0;
+    line-height: 58px;
+  }
+  
+  .ongoing-idea {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.page {
+    display: none;
+}
+
+.idea-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.delete-idea {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#countdownClock {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+#editPage {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#editor {
+    height: 300px;
+}
+
+#saveEditButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.label {
+  position: absolute;
+  top: 20px;  /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: auto;
+  height: auto;
+  max-width: 506px;
+  max-height: 348px;
+  overflow: visible;
+}
+
+.ONE-idea-at-a-time {
+  font-family: "Heiti TC-Medium", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #002082;
+  font-size: 64px;
+  line-height: 1.1;  /* Adjust line height for better spacing */
+  text-align: left;
+  white-space: pre-wrap;  /* Changed from pre-line to pre-wrap */
+  word-break: break-word;  /* Allow long words to break */
+}
+
+@media (max-width: 768px) {
+  .ONE-idea-at-a-time {
+    font-size: 48px;  /* Smaller font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .ONE-idea-at-a-time {
+    font-size: 36px;  /* Even smaller font size for mobile devices */
+  }
+}
