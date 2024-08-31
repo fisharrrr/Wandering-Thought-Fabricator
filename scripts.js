@@ -49,14 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (ideas.length > 0) {
             const idea = ideas[currentIdeaIndex];
             if (!idea.deadline) {
-                idea.deadline = setRandomDeadline().toISOString();
+                idea.deadline = setRandomDeadline();
                 localStorage.setItem('ideas', JSON.stringify(ideas));
             }
-            taskTitle.textContent = idea.title;
-            taskDetails.innerHTML = idea.details || 'No details added yet.';
-            taskDeadline.textContent = `Deadline: ${new Date(idea.deadline).toLocaleDateString()}`;
-            ongoingIdea.style.display = 'block';
-            updateCountdown();
+            displayCurrentIdea();
         } else {
             ongoingIdea.style.display = 'none';
         }
@@ -99,7 +95,16 @@ document.addEventListener('DOMContentLoaded', function() {
             finishedIdeas.push(finishedIdea);
             localStorage.setItem('ideas', JSON.stringify(ideas));
             localStorage.setItem('finishedIdeas', JSON.stringify(finishedIdeas));
-            displayNextIdea();
+            
+            if (ideas.length === 0) {
+                currentIdeaIndex = -1;
+                ongoingIdea.style.display = 'none';
+            } else {
+                if (currentIdeaIndex >= ideas.length) {
+                    currentIdeaIndex = 0;
+                }
+                displayNextIdea();
+            }
         }
     });
 
@@ -200,16 +205,35 @@ document.addEventListener('DOMContentLoaded', function() {
         ideas[currentIdeaIndex].details = quill.root.innerHTML;
         localStorage.setItem('ideas', JSON.stringify(ideas));
         showPage('main');
-        displayNextIdea();
+        displayCurrentIdea(); // New function to display the current idea without changing it
     });
 
     taskDetails.addEventListener('click', function() {
         showPage('edit');
     });
 
+    function displayCurrentIdea() {
+        if (ideas.length > 0 && currentIdeaIndex >= 0) {
+            const idea = ideas[currentIdeaIndex];
+            taskTitle.textContent = idea.title;
+            taskDetails.innerHTML = idea.details || 'No details added yet.';
+            
+            const deadlineDate = typeof idea.deadline === 'string' ? new Date(idea.deadline) : idea.deadline;
+            taskDeadline.textContent = `Deadline: ${deadlineDate.toLocaleDateString()}`;
+            
+            ongoingIdea.style.display = 'block';
+            updateCountdown();
+        } else {
+            ongoingIdea.style.display = 'none';
+        }
+    }
+
     // Initialize
     showPage('main');
     if (ideas.length > 0) {
-        displayNextIdea();
+        if (currentIdeaIndex === -1) {
+            currentIdeaIndex = 0; // Start with the first idea if none is selected
+        }
+        displayCurrentIdea();
     }
 });
