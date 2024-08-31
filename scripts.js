@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (ideas.length > 0) {
             const idea = ideas[currentIdeaIndex];
             if (!idea.deadline) {
-                idea.deadline = setRandomDeadline();
+                idea.deadline = setRandomDeadline().toISOString();
                 localStorage.setItem('ideas', JSON.stringify(ideas));
             }
             taskTitle.textContent = idea.title;
             taskDetails.innerHTML = idea.details || 'No details added yet.';
-            taskDeadline.textContent = `Deadline: ${idea.deadline.toLocaleDateString()}`;
+            taskDeadline.textContent = `Deadline: ${new Date(idea.deadline).toLocaleDateString()}`;
             ongoingIdea.style.display = 'block';
             updateCountdown();
         } else {
