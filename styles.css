@@ -162,3 +162,46 @@ body {
     margin-bottom: 20px;
   }
 }
+
+.page {
+    display: none;
+}
+
+.idea-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.delete-idea {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#countdownClock {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+#editPage {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#editor {
+    height: 300px;
+}
+
+#saveEditButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
