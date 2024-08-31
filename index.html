@@ -10,51 +10,39 @@
     <div class="header">
         <img src="images/WTFLogov3.svg" alt="wtf." class="logo">
         <div class="menu-icon" id="menuButton">☰</div>
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="#" class="menu-item" data-page="main">Main Page</a>
-            <a href="#" class="menu-item" data-page="ideas">Ideas</a>
-            <a href="#" class="menu-item" data-page="finished">Finished Ideas</a>
-            <a href="#" class="menu-item" data-page="about">About the Machine</a>
-        </div>
     </div>
 
     <div class="main-content" id="mainContent">
-        <div class="quote">
-            ONE<br>
-            Idea<br>
-            at a<br>
-            Time.
+        <div class="content-wrapper">
+            <div class="quote">
+                ONE<br>
+                Idea<br>
+                at a<br>
+                Time.
+            </div>
+
+            <div class="ongoing-idea" id="ongoingIdea">
+                <h2>On going task.</h2>
+                <div class="task-content">
+                    <h3 id="taskTitle"></h3>
+                    <p id="taskDetails"></p>
+                    <p id="taskDeadline"></p>
+                </div>
+                <button id="doneNextButton">DONE & NEXT</button>
+            </div>
         </div>
 
         <div class="idea-input">
             <input type="text" id="ideaInput" placeholder="Your ideas here">
             <span class="enter-hint">Enter ↵</span>
         </div>
-
-        <div class="ongoing-idea" id="ongoingIdea">
-            <h2>On going task.</h2>
-            <div class="task-content">
-                <h3 id="taskTitle"></h3>
-                <p id="taskDetails"></p>
-                <p id="taskDeadline"></p>
-            </div>
-            <button id="doneNextButton">DONE & NEXT</button>
-        </div>
     </div>
 
-    <div class="page" id="ideasPage">
-        <h2>Ideas</h2>
-        <div id="ideaTabs"></div>
-    </div>
-
-    <div class="page" id="finishedIdeasPage">
-        <h2>Finished Ideas</h2>
-        <div id="finishedIdeaTabs"></div>
-    </div>
-
-    <div class="page" id="aboutPage">
-        <h2>About the Machine</h2>
-        <p>Information about the Wandering Thought Fabricator goes here.</p>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#" class="menu-item" data-page="main">Main Page</a>
+        <a href="#" class="menu-item" data-page="ideas">Ideas</a>
+        <a href="#" class="menu-item" data-page="finished">Finished Ideas</a>
+        <a href="#" class="menu-item" data-page="about">About the Machine</a>
     </div>
 
     <script src="scripts.js"></script>
