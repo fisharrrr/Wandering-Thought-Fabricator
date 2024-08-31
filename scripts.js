@@ -90,20 +90,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     doneNextButton.addEventListener('click', function() {
         if (ideas.length > 0) {
-            const finishedIdea = ideas.splice(currentIdeaIndex, 1)[0];
+            const finishedIdea = ideas.shift(); // Remove the first idea
             finishedIdea.finishedDate = new Date().toLocaleString();
             finishedIdeas.push(finishedIdea);
             localStorage.setItem('ideas', JSON.stringify(ideas));
             localStorage.setItem('finishedIdeas', JSON.stringify(finishedIdeas));
             
             if (ideas.length === 0) {
-                currentIdeaIndex = -1;
                 ongoingIdea.style.display = 'none';
             } else {
-                if (currentIdeaIndex >= ideas.length) {
-                    currentIdeaIndex = 0;
-                }
-                displayNextIdea();
+                displayCurrentIdea();
             }
         }
     });
@@ -137,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         switch(page) {
             case 'main':
                 mainContent.style.display = 'flex';
+                displayCurrentIdea();
                 break;
             case 'ideas':
                 ideasPage.style.display = 'block';
@@ -151,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'edit':
                 editPage.style.display = 'block';
-                quill.setContents(quill.clipboard.convert(ideas[currentIdeaIndex].details));
+                populateEditPage();
                 break;
         }
     }
@@ -202,10 +199,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     saveEditButton.addEventListener('click', function() {
-        ideas[currentIdeaIndex].details = quill.root.innerHTML;
-        localStorage.setItem('ideas', JSON.stringify(ideas));
-        showPage('main');
-        displayCurrentIdea(); // New function to display the current idea without changing it
+        if (ideas.length > 0) {
+            ideas[0].details = quill.root.innerHTML;
+            localStorage.setItem('ideas', JSON.stringify(ideas));
+            showPage('main');
+        }
     });
 
     taskDetails.addEventListener('click', function() {
@@ -213,8 +211,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function displayCurrentIdea() {
-        if (ideas.length > 0 && currentIdeaIndex >= 0) {
-            const idea = ideas[currentIdeaIndex];
+        if (ideas.length > 0) {
+            const idea = ideas[0]; // Always display the first idea
             taskTitle.textContent = idea.title;
             taskDetails.innerHTML = idea.details || 'No details added yet.';
             
@@ -225,6 +223,16 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCountdown();
         } else {
             ongoingIdea.style.display = 'none';
+        }
+    }
+
+    function populateEditPage() {
+        if (ideas.length > 0) {
+            const idea = ideas[0];
+            document.getElementById('editTitle').textContent = idea.title;
+            document.getElementById('editDeadline').textContent = `Deadline: ${new Date(idea.deadline).toLocaleDateString()}`;
+            document.getElementById('editCountdown').textContent = countdownClock.textContent;
+            quill.root.innerHTML = idea.details || '';
         }
     }
 
