@@ -35,20 +35,26 @@ body {
 .main-content {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 100px);
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 .quote {
   font-size: 48px;
   color: var(--primary-color);
   line-height: 1.2;
-  margin: 40px 0;
 }
 
 .idea-input {
   width: 100%;
   position: relative;
-  margin-bottom: 40px;
+  margin-top: auto;
 }
 
 #ideaInput {
@@ -73,7 +79,6 @@ body {
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  align-self: flex-end;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -116,44 +121,44 @@ body {
   float: right;
 }
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.menu-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
 @media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
   .quote {
     font-size: 36px;
+    margin-bottom: 20px;
   }
   
   .ongoing-idea {
     width: 100%;
+    margin-bottom: 20px;
   }
-}
-
-/* Add these styles to your existing CSS */
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border-radius: 4px;
-    z-index: 1000;
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.menu-item {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: var(--text-color);
-}
-
-.menu-item:hover {
-    background-color: #f0f0f0;
-}
-
-.page {
-    display: none;
 }
