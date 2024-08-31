@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wtf. | Wandering Thought Fabricator</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 </head>
 <body>
     <div class="header">
@@ -25,8 +26,9 @@
                 <h2>On going task.</h2>
                 <div class="task-content">
                     <h3 id="taskTitle"></h3>
-                    <p id="taskDetails"></p>
+                    <div id="taskDetails"></div>
                     <p id="taskDeadline"></p>
+                    <div id="countdownClock"></div>
                 </div>
                 <button id="doneNextButton">DONE & NEXT</button>
             </div>
@@ -50,8 +52,13 @@
 
     <div class="page" id="aboutPage">
         <h2>About the Machine</h2>
-        <p>The Wandering Thought Fabricator Idea Machine is designed to help you manage your creative ideas efficiently. 
-                It allows you to store, update, and track the progress of your ideas with ease. </p>
+        <p>Information about the Wandering Thought Fabricator goes here.</p>
+    </div>
+
+    <div class="page" id="editPage">
+        <h2>Edit Idea</h2>
+        <div id="editor"></div>
+        <button id="saveEditButton">Save</button>
     </div>
 
     <div class="dropdown-menu" id="dropdownMenu">
@@ -61,6 +68,7 @@
         <a href="#" class="menu-item" data-page="about">About the Machine</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
