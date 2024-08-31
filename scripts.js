@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.value.trim() !== '') {
                 saveIdea(this.value.trim());
                 this.value = '';
+                // Keep the input active after submitting
+                this.focus();
             }
-            this.classList.remove('active');
-            this.style.boxShadow = 'none';
         }
     });
 
@@ -275,7 +275,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.addEventListener('keydown', function(event) {
         if (document.getElementById('mainContent').style.display !== 'none') {
-            if (event.key === 'Enter' && document.activeElement !== ideaInput) {
+            const activeElement = document.activeElement;
+            const ideaInput = document.getElementById('ideaInput');
+            if (event.key === 'Enter' && activeElement !== ideaInput && activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
                 event.preventDefault();
                 activateIdeaInput();
             }
@@ -283,13 +285,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function activateIdeaInput() {
+        const ideaInput = document.getElementById('ideaInput');
         ideaInput.classList.add('active');
-        // Optional: Add a visual indicator that the input is active
         ideaInput.style.boxShadow = '0 0 5px #002082';
+        ideaInput.focus(); // This will allow typing
     }
 
     ideaInput.addEventListener('blur', function() {
-        this.classList.remove('active');
-        this.style.boxShadow = 'none';
+        // Short delay to check if the input is focused again (i.e., user started typing)
+        setTimeout(() => {
+            if (document.activeElement !== this) {
+                this.classList.remove('active');
+                this.style.boxShadow = 'none';
+            }
+        }, 0);
     });
 });
