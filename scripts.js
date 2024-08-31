@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function saveIdea(idea) {
+        const randomDays = Math.floor(Math.random() * 15) + 1;
+        const deadline = new Date(Date.now() + randomDays * 24 * 60 * 60 * 1000);
         ideas.push({
             title: idea,
             details: '',
-            deadline: null
+            deadline: deadline.toISOString()
         });
         localStorage.setItem('ideas', JSON.stringify(ideas));
     }
@@ -59,7 +61,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateCountdown() {
-        const idea = ideas[currentIdeaIndex];
+        if (ideas.length === 0) {
+            clearInterval(countdownInterval);
+            countdownClock.textContent = "No ongoing task";
+            return;
+        }
+
+        const idea = ideas[0];
+        if (!idea.deadline) {
+            countdownClock.textContent = "Deadline not set";
+            return;
+        }
+
         const deadline = new Date(idea.deadline);
         countdownInterval = setInterval(() => {
             const now = new Date();
@@ -216,13 +229,21 @@ document.addEventListener('DOMContentLoaded', function() {
             taskTitle.textContent = idea.title;
             taskDetails.innerHTML = idea.details || 'No details added yet.';
             
-            const deadlineDate = typeof idea.deadline === 'string' ? new Date(idea.deadline) : idea.deadline;
-            taskDeadline.textContent = `Deadline: ${deadlineDate.toLocaleDateString()}`;
+            if (idea.deadline) {
+                const deadlineDate = typeof idea.deadline === 'string' ? new Date(idea.deadline) : idea.deadline;
+                taskDeadline.textContent = `Deadline: ${deadlineDate.toLocaleDateString()}`;
+            } else {
+                taskDeadline.textContent = 'Deadline not set';
+            }
             
             ongoingIdea.style.display = 'block';
             updateCountdown();
         } else {
             ongoingIdea.style.display = 'none';
+            taskTitle.textContent = 'No ongoing task';
+            taskDetails.innerHTML = '';
+            taskDeadline.textContent = '';
+            countdownClock.textContent = '';
         }
     }
 
@@ -248,5 +269,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.logo-link').addEventListener('click', function(e) {
         e.preventDefault();
         showPage('main');
+    });
+
+    function focusIdeaInput() {
+        const ideaInput = document.getElementById('ideaInput');
+        ideaInput.focus();
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (document.getElementById('mainContent').style.display !== 'none') {
+            if (event.key === 'Enter' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                event.preventDefault();
+                focusIdeaInput();
+            }
+        }
     });
 });
